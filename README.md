@@ -75,3 +75,7 @@ Prepare your own inputs as described in [DATA.md](DATA.md). Tests use generated 
 ## Practical relevance and limitations
 
 Routing quality and evaluator judgments depend on the selected models and prompts. Live runs require a configured OpenAI-compatible provider. No client delivery, autonomous operational deployment, or business impact is claimed.
+
+## Reuse
+
+The original contributions listed in [LICENSING.md](LICENSING.md) are available under [MIT](LICENSE). This scoped grant preserves upstream notices and separate dataset, simulator, notebook and checkpoint terms.
