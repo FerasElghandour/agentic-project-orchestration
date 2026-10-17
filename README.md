@@ -1,18 +1,47 @@
 # Agentic Project Orchestration
 
-**Feras Elghandour** · Technical case study
-
 Turn an unstructured product request into routed, evaluated, and actionable project deliverables.
 
 ## Implementation
 
 A provider-neutral orchestration core with embedding-based routing, bounded revision loops, typed reviewer decisions, and staged project artifacts.
 
-```mermaid
-flowchart LR
-    A[Validated inputs] --> B[Portable implementation]
-    B --> C[Evaluation and contract checks]
-    C --> D[Inspectable results]
+![Implementation mechanism: Original request and worker callback → Typed reviewer decision → Accept result or retain correction feedback → Revise within bounded iteration budget → Stop rejected hierarchy before downstream work](assets/mechanism.svg)
+
+## Try a small example
+
+A small offline fixture exercises the public implementation. It demonstrates the behavior shown below; it does not replace the historical dataset, benchmark or production validation.
+
+After the local setup below, run from the repository root:
+
+```sh
+python examples/quickstart.py
+```
+
+The [example source](examples/quickstart.py), [captured output](examples/expected-output.txt) and [execution record](examples/environment.json) keep this demonstration inspectable. Floating-point values may vary with library versions.
+
+Observed output from this run:
+
+```text
+{
+  "response": "ready",
+  "accepted": true,
+  "attempts": 2,
+  "history": [
+    {
+      "attempt": 1,
+      "response": "draft",
+      "accepted": false,
+      "feedback": "Return ready"
+    },
+    {
+      "attempt": 2,
+      "response": "ready",
+      "accepted": true,
+      "feedback": "Return ready"
+    }
+  ]
+}
 ```
 
 ## Completed study
@@ -30,7 +59,6 @@ python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python smoke_test.py
-python smoke_test.py
 ```
 
 Prepare your own inputs as described in [DATA.md](DATA.md). Tests use generated fixtures and do not need credentials or provider calls. [VALIDATION.md](VALIDATION.md) records their scope.
@@ -38,5 +66,3 @@ Prepare your own inputs as described in [DATA.md](DATA.md). Tests use generated 
 ## Practical relevance and limitations
 
 Routing quality and evaluator judgments depend on the selected models and prompts. Live runs require a configured OpenAI-compatible provider. No client delivery, autonomous operational deployment, or business impact is claimed.
-
-This edition makes the core behavior reusable and inspectable. Historical metrics and synthetic contract tests provide different kinds of evidence; neither establishes client deployment or commercial impact.

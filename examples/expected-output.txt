@@ -1,0 +1,19 @@
+{
+  "response": "ready",
+  "accepted": true,
+  "attempts": 2,
+  "history": [
+    {
+      "attempt": 1,
+      "response": "draft",
+      "accepted": false,
+      "feedback": "Return ready"
+    },
+    {
+      "attempt": 2,
+      "response": "ready",
+      "accepted": true,
+      "feedback": "Return ready"
+    }
+  ]
+}
